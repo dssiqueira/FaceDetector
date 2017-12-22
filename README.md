@@ -6,7 +6,7 @@ Implementing face recognition using dlib library in python.
 [Installation](https://www.pyimagesearch.com/2017/03/27/how-to-install-dlib/)
 [Python 2.7](https://docs.python.org/2/index.html)
 
-# Exemples
+# Examples
 [frontal_face_detector.py](https://github.com/dssiqueira/face_detector/blob/master/frontal_face_detector.py)
   - Frontal Facial Recognition
   - Face cut found
