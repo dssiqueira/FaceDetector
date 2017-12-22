@@ -17,12 +17,15 @@ Execute the script
 $ python frontal_face_detector.py
 ```
 output:
+
 ![N|output](https://image.ibb.co/kXOgAR/Screenshot_from_2017_12_22_08_31_38.png)
 
 crop.jpg:
+
 ![N|output](https://image.ibb.co/ifobc6/crop.jpg)
 
 cropped_img.jpg:
+
 ![N|output](https://preview.ibb.co/iw0px6/cropped_img.jpg)
 
 
