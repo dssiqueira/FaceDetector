@@ -1,5 +1,3 @@
-
-tkinter
 pillow
 dlib
 scikit-image

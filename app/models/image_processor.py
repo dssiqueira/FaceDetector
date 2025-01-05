@@ -8,10 +8,12 @@ class ImageProcessor:
         self.file_name = ""
         self.image = None
         self.faces = None
-        self.crop_dir = "crop"
+        # Criar o diretório 'crops' na raiz do projeto
+        self.crop_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'crops')
+        print(f"Diretório de recortes configurado: {self.crop_dir}")
 
     def select_image(self):
-        self.file_name = filedialog.askopenfilename(filetypes=[("Image files", "*.png")])
+        self.file_name = filedialog.askopenfilename(filetypes=[("Image files", "*.png *.jpg *.jpeg")])
         if self.file_name:
             self.image = cv2.imread(self.file_name)
             return self.get_image_data()
@@ -43,12 +45,45 @@ class ImageProcessor:
         panel.image = img_data
 
     def save_crops(self):
-        os.makedirs(self.crop_dir, exist_ok=True)
+        print("Iniciando salvamento dos recortes...")
+        
+        # Criar diretório se não existir
+        if not os.path.exists(self.crop_dir):
+            os.makedirs(self.crop_dir)
+            print(f"Diretório {self.crop_dir} criado")
+        
+        # Limpar diretório de recortes anteriores
+        for file in os.listdir(self.crop_dir):
+            file_path = os.path.join(self.crop_dir, file)
+            try:
+                if os.path.isfile(file_path):
+                    os.unlink(file_path)
+                    print(f"Arquivo antigo removido: {file_path}")
+            except Exception as e:
+                print(f'Erro ao deletar {file_path}: {e}')
+
+        # Salvar novos recortes
         cropped_images = []
         for i, (x, y, w, h) in enumerate(self.faces):
+            # Recortar a face
             cropped_img = self.image[y:y+h, x:x+w]
-            cropped_images.append(ImageTk.PhotoImage(Image.fromarray(cv2.cvtColor(cropped_img, cv2.COLOR_BGR2RGB))))
+            
+            # Converter para RGB (PIL usa RGB)
+            cropped_img_rgb = cv2.cvtColor(cropped_img, cv2.COLOR_BGR2RGB)
+            
+            # Criar objeto PIL Image
+            pil_img = Image.fromarray(cropped_img_rgb)
+            
+            # Salvar no disco
+            file_path = os.path.join(self.crop_dir, f'face_{i+1}.png')
+            pil_img.save(file_path, 'PNG')
+            print(f"Recorte salvo: {file_path}")
+            
+            # Criar thumbnail para exibição
+            cropped_images.append(ImageTk.PhotoImage(pil_img))
+        
+        print(f"Total de recortes salvos: {len(cropped_images)}")
         return cropped_images
 
     def get_crop_dir(self):
-        return self.crop_dir
+        return self.crop_dir  # Já é um caminho absoluto
