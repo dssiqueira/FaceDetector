@@ -1,8 +1,6 @@
 
 # Face Detector App
 
-![Face Detector](assets/img/face_detector_banner.png)
-
 Um aplicativo intuitivo para detectar e recortar rostos automaticamente em imagens. Este projeto foi desenvolvido para automatizar o processo de criação de crachás, tornando-o fácil de usar até mesmo por usuários leigos.
 
 ## 🖼️ Funcionalidades
@@ -16,7 +14,7 @@ Um aplicativo intuitivo para detectar e recortar rostos automaticamente em image
 
 ### Pré-requisitos
 
-Certifique-se de ter o Python 3.x instalado em sua máquina e os seguintes pacotes:
+Python 3.9+ com Tkinter (já incluso no instalador oficial do Python no Windows e no macOS; no Linux, instale o pacote `python3-tk`). As dependências são o OpenCV e o Pillow:
 
 ```bash
 pip install -r requirements.txt
@@ -27,15 +25,15 @@ pip install -r requirements.txt
 1. Clone este repositório:
 
     ```bash
-    git clone https://github.com/seuusuario/face-detector-app.git
-    cd face-detector-app
+    git clone https://github.com/dssiqueira/FaceDetector.git
+    cd FaceDetector
     ```
 
 2. Configure o ambiente virtual (opcional, mas recomendado):
 
     ```bash
     python -m venv venv
-    source venv/bin/activate  # Para Windows: venv\Scripts ctivate
+    source venv/bin/activate  # No Windows: venv\Scripts\activate
     ```
 
 3. Instale as dependências:
@@ -95,4 +93,4 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ## 🙌 Agradecimentos
 
-Feito com 💖 por [Dsiqueira](https://dsiqueira.com) - Versão 1.0
+Feito com 💖 por [Dsiqueira](https://dsiqueira.com) - Versão 1.1
