@@ -19,8 +19,9 @@ class ImageProcessor:
             return self.get_image_data()
         return None
 
-    def get_image_data(self):
-        image = Image.fromarray(cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB))
+    def get_image_data(self, image=None):
+        source = self.image if image is None else image
+        image = Image.fromarray(cv2.cvtColor(source, cv2.COLOR_BGR2RGB))
         return ImageTk.PhotoImage(image)
 
     def process_image(self):
@@ -35,10 +36,13 @@ class ImageProcessor:
             messagebox.showinfo("Resultado", "Nenhum rosto foi detectado na imagem.")
             return None
 
+        # Desenha os retângulos numa cópia, só para a pré-visualização: os
+        # recortes saem da imagem original, sem a borda verde.
+        preview = self.image.copy()
         for (x, y, w, h) in self.faces:
-            cv2.rectangle(self.image, (x, y), (x+w, y+h), (0, 255, 0), 2)
-        
-        return self.get_image_data()
+            cv2.rectangle(preview, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+        return self.get_image_data(preview)
 
     def display_image(self, img_data, panel):
         panel.config(image=img_data)

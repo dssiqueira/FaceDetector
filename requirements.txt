@@ -1,3 +1,4 @@
-pillow
-dlib
-scikit-image
+# OpenCV 5 moved the Haar cascades (haarcascade_frontalface_default.xml) out of
+# the main package; the app relies on them, so stay on 4.x.
+opencv-python>=4.8,<5
+pillow>=10.0

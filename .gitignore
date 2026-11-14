@@ -17,3 +17,13 @@ Thumbs.db
 
 # Arquivos do sistema operacional
 *.swp
+
+# Saídas geradas pelo app
+crops/
+crop/
+processed_image.png
+
+# Sistema
+.DS_Store
+Thumbs.db
+raw.png

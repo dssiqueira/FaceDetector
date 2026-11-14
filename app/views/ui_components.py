@@ -3,6 +3,7 @@ from tkinter import messagebox, ttk
 import webbrowser
 import os
 import subprocess
+import sys
 
 # Nova paleta de cores mais clara e moderna
 COLORS = {
@@ -207,8 +208,13 @@ class Sidebar(tk.Frame):
         
         if os.path.exists(folder_path):
             try:
-                # No macOS, usar o comando 'open'
-                subprocess.run(['open', folder_path])
+                # Abre a pasta no gerenciador de arquivos do sistema
+                if sys.platform.startswith('win'):
+                    os.startfile(folder_path)
+                elif sys.platform == 'darwin':
+                    subprocess.run(['open', folder_path], check=True)
+                else:
+                    subprocess.run(['xdg-open', folder_path], check=True)
                 print(f"Diretório aberto com sucesso: {folder_path}")
             except Exception as e:
                 print(f"Erro ao abrir diretório: {e}")
